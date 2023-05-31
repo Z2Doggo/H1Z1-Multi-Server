@@ -48,7 +48,6 @@ using f64 = double;
 // experimental data types
 using str = std::string;
 
-
 #if defined(YOTE_INTERNAL)
 // NOTE(rhett): removing static linkage to play along with superluminal
 #define internal
