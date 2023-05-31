@@ -2,6 +2,8 @@
     "files.associations": {
         "chrono": "cpp",
         "cstdlib": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "iostream": "cpp",
+        "unordered_map": "cpp"
     }
 }
