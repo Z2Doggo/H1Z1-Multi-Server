@@ -48,7 +48,7 @@ enum class Login_Packet_Kind
 #undef LOGIN_PACKET_KIND
 };
 
-std::string login_packet_names[static_cast<int>(Login_Packet_Kind::Login_Packet_Kind__End) + 1] =
+str login_packet_names[static_cast<int>(Login_Packet_Kind::Login_Packet_Kind__End) + 1] =
 {
 #define LOGIN_PACKET_KIND(e, s) s
     LOGIN_PACKET_KINDS
