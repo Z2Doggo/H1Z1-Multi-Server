@@ -57,7 +57,7 @@ struct Platform_Api {
 #include <timeapi.h>
 
 #include <limits.h>
- // HACK(rhett): 
+ // HACK: 
 global u64 global_performance_frequency;
 
 #if defined(YOTE_PLATFORM_USE_SOCKETS)
@@ -161,7 +161,7 @@ internal PLATFORM_BUFFER_LOAD_FROM_FILE(platform_win_buffer_load_from_file) {
     return 0;
   }
 
-  // TODO(rhett): make sure we want LowPart
+  // TODO: make sure we want LowPart
   if (file_size.LowPart > size) {
     printf("[!] Buffer is too small to load from file \"%s\"\n", file_path);
     CloseHandle(file_handle);
@@ -230,14 +230,14 @@ internal PLATFORM_SOCKET_UDP_CREATE_AND_BIND(platform_win_socket_udp_create_and_
     return result;
   }
 
-  // NOTE(rhett): Use non-blocking socket
+  // NOTE: Use non-blocking socket
   u_long cmd_arg = TRUE;
   if (ioctlsocket(result.socket, FIONBIO, & cmd_arg) == SOCKET_ERROR) {
     printf("[!] ioctlsocket() failed: %d\n", WSAGetLastError());
     goto socket_close;
   }
 
-  // NOTE(rhett): Bind
+  // NOTE: Bind
   SOCKADDR_IN addr = {
     .sin_family = AF_INET,
     .sin_port = htons(port),
@@ -255,7 +255,7 @@ internal PLATFORM_SOCKET_UDP_CREATE_AND_BIND(platform_win_socket_udp_create_and_
 
   socket_close:
     if (closesocket(result.socket) == SOCKET_ERROR) {
-      // TODO(rhett): What do we even do at this point?
+      // TODO: What do we even do at this point?
       printf("[!] closesocket() failed: %d\n", WSAGetLastError());
     }
   return result;

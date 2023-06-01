@@ -1,5 +1,5 @@
-// TODO(rhett): actually probably don't need this
-// TODO(rhett): or maybe I do?
+// TODO: actually probably don't need this
+// TODO: or maybe I do?
 // YOTE_IMPLEMENTATION
 
 // YOTE_SLOW
@@ -8,12 +8,12 @@
 // YOTE_USE_ARENA
 // YOTE_USE_STRING
 
-// TODO(rhett): maybe x86 xor x64
+// TODO: maybe x86 xor x64
 // YOTE_NO_X64 ??
 
 
-// TODO(rhett): Sort out standard library dependence 
-// TODO(rhett): size is count of bytes. length is count of contiguous elements?
+// TODO: Sort out standard library dependence 
+// TODO: size is count of bytes. length is count of contiguous elements?
 
 
 //====================================================================================================
@@ -49,9 +49,9 @@ using f64 = double;
 using str = std::string;
 
 #if defined(YOTE_INTERNAL)
-// NOTE(rhett): removing static linkage to play along with superluminal
+// NOTE: removing static linkage to play along with superluminal
 #define internal
-// TODO(rhett): This may depend on msvc. 
+// TODO: This may depend on msvc. 
 #define DEBUG_BREAK  __debugbreak()
 #else
 #define internal  static
@@ -61,13 +61,13 @@ using str = std::string;
 #define local_persist  static
 #define global         static
 
-// TODO(rhett): windows.h will probably override this. think about it
+// TODO: windows.h will probably override this. think about it
 #define TRUE   1
 #define FALSE  0
 
 #define KB(n)  ((n)   * 1024)
 #define MB(n)  (KB(n) * 1024)
-// TODO(rhett): integral promotion may become an issue
+// TODO: integral promotion may become an issue
 #define GB(n)  (MB(n) * (u64)1024)
 #define TB(n)  (GB(n) * (u64)1024)
 
@@ -86,15 +86,15 @@ using str = std::string;
 
 #if defined(YOTE_SLOW)
 #define ASSERT(expr)           if (!(expr)) { ABORT; }
-// TODO(rhett): Probably don't need to wrap msg in parens or logical NOTs, right?
+// TODO: Probably don't need to wrap msg in parens or logical NOTs, right?
 #define ASSERT_MSG(expr, msg)  ASSERT((expr) && msg)
 #else
 #define ASSERT(expr)
 #define ASSERT_MSG(expr, msg)
 #endif // YOTE_SLOW
 
-// NOTE(rhett): Causes a negative subscript error if condition is false
-// TODO(rhett): Probably don't need to undefine these
+// NOTE: Causes a negative subscript error if condition is false
+// TODO: Probably don't need to undefine these
 #define STATIC_ASSERT_INTERNAL_1(cond, line)  typedef char static_assert_line_##line[(!!(cond)) * 2 - 1]
 #define STATIC_ASSERT_INTERNAL_2(cond, line)  STATIC_ASSERT_INTERNAL_1(cond, line)
 #define STATIC_ASSERT(cond)                   STATIC_ASSERT_INTERNAL_2(cond, __LINE__)
@@ -113,15 +113,15 @@ using str = std::string;
 #define EVAL_PRINT_F64(x)   printf("%s = %f:%x\n", #x, x, *(u64*)&x)
 #define EVAL_PRINT_CSTR(x)  printf("%s = \"%s\"\n", #x, x)
 
-// TODO(rhett): try this
+// TODO: try this
 #define DO_ONCE_INTERNAL_1(to_do, line)  local_persist b32 do_once_##line = 0; if (!do_once_##line++) { to_do; }
 #define DO_ONCE_INTERNAL_2(to_do, line)  DO_ONCE_INTERNAL_1(to_do, line)
 #define DO_ONCE(to_do)                   DO_ONCE_INTERNAL_2(to_do, __LINE__)
 
-// TODO(rhett): solidify distinction between args and params
+// TODO: solidify distinction between args and params
 
-// NOTE(rhett): https://stackoverflow.com/a/34182426
-// TODO(rhett): Do we need STRIP_PARAMS around the UNPACK_PARAMS?
+// NOTE: https://stackoverflow.com/a/34182426
+// TODO: Do we need STRIP_PARAMS around the UNPACK_PARAMS?
 //#define STRIP_PARENS(X)     X
 #define UNPACK_PARAMS(...)  __VA_ARGS__
 #define PASS_PARAMS(X)      UNPACK_PARAMS X
@@ -137,7 +137,7 @@ using str = std::string;
 //}
 
 #if 0
-// TODO(rhett): empty field at start to allow no params?
+// TODO: empty field at start to allow no params?
 #define PARAMS_DECLARE(return_type, name, ...)  typedef struct { u32 unused; __VA_ARGS__; } name##_params; return_type name##_internal(name##_params params)
 #define PARAMS_BIND(name, ...)                  name##_internal((name##_params){ 0, __VA_ARGS__ })
 #define PARAMS_DEFAULT(name, value)             name = params.name ? params.name : (value)
@@ -197,7 +197,7 @@ internal void base_memory_copy(void* destination, void* source, isize size)
 	}
 }
 
-// TODO(rhett): Use length instead here? Or will that be more confusing since they're equal in this context?
+// TODO: Use length instead here? Or will that be more confusing since they're equal in this context?
 internal isize base_ztstring_size(u8* data)
 {
 	isize count = 0;
@@ -226,8 +226,8 @@ internal uptr base_align_forward(uptr ptr, isize align)
 
 #if defined(YOTE_USE_ARENA)
 
-// TODO(rhett): Re-write debug/internal code
-// TODO(rhett): is this a fine default?
+// TODO: Re-write debug/internal code
+// TODO: is this a fine default?
 #define ARENA_ALIGN_DEFAULT   sizeof(void*)
 #define ARENA_DEFAULT_PARAMS  PASS_PARAMS((.should_clear=TRUE, .alignment=ARENA_ALIGN_DEFAULT))
 
@@ -257,12 +257,12 @@ struct Arena_Temp
 #define arena_push_size(...)  PARAMS_BIND(arena_push_size, ARENA_DEFAULT_PARAMS, __VA_ARGS__)
 PARAMS_DECLARE(void*, arena_push_size, Arena* arena; isize size; b32 should_clear; isize alignment)
 {
-	// TODO(rhett): think about if I can simplify this. probably not
+	// TODO: think about if I can simplify this. probably not
 	//Arena* arena = params.arena;
 	//isize size = params.size;
 	ASSERT(params.arena);
 	ASSERT(params.size);
-	// NOTE(rhett): default must be FALSE since FALSE is a valid input
+	// NOTE: default must be FALSE since FALSE is a valid input
 	//b32 PARAMS_DEFAULT(should_skip_clear, FALSE);
 	//isize PARAMS_DEFAULT(alignment, ARENA_ALIGN_DEFAULT);
 
@@ -270,7 +270,7 @@ PARAMS_DECLARE(void*, arena_push_size, Arena* arena; isize size; b32 should_clea
 	isize padding = 0;
 	padding = aligned_ptr - ((uptr)params.arena->buffer + params.arena->tail_offset);
 
-	// TODO(rhett): Assert for now. we should be able to recover from this later I think
+	// TODO: Assert for now. we should be able to recover from this later I think
 	ASSERT_MSG((params.size + padding) < params.arena->capacity, "Allocation excedes arena capacity");
 
 	if (params.should_clear)
@@ -285,7 +285,7 @@ PARAMS_DECLARE(void*, arena_push_size, Arena* arena; isize size; b32 should_clea
 	return (void*)aligned_ptr;
 }
 
-// TODO(rhett): preeeeeeeeeetty sure this will work right
+// TODO: preeeeeeeeeetty sure this will work right
 #define arena_push_struct(arena, type, ...)        (type*)arena_push_size(arena, SIZE_OF(type), __VA_ARGS__)
 #define arena_push_array(arena, type, count, ...)  (type*)arena_push_size(arena, SIZE_OF(type) * count, __VA_ARGS__)
 #define arena_bootstrap_push_struct(buffer, capacity, name, type, member, ...)  arena_bootstrap_push_size(buffer, capacity, name, SIZE_OF(type), offsetof(type, member), __VA_ARGS__)
@@ -326,7 +326,7 @@ PARAMS_DECLARE(Buffer, arena_push_copy_ztstring_as_string, Arena* arena; void* s
 	ASSERT(params.arena);
 	ASSERT(params.source);
 
-	// NOTE(rhett): keeping zero-termination for functions that expect that
+	// NOTE: keeping zero-termination for functions that expect that
 	Buffer result =
 	{
 		.size = base_ztstring_size(params.source),
@@ -336,7 +336,7 @@ PARAMS_DECLARE(Buffer, arena_push_copy_ztstring_as_string, Arena* arena; void* s
 	return result;
 }
 
-// TODO(rhett): how should we handle names? only in internal mode?
+// TODO: how should we handle names? only in internal mode?
 #define arena_bootstrap_push_size(...)  PARAMS_BIND(arena_bootstrap_push_size, ARENA_DEFAULT_PARAMS, __VA_ARGS__)
 PARAMS_DECLARE(void*, arena_bootstrap_push_size, void* buffer; isize capacity; char* name; isize struct_size; isize offset_to_arena; b32 should_clear; isize alignment)
 {

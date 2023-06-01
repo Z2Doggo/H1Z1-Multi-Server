@@ -75,7 +75,7 @@ util_string_concat(i8 * destination, u32 length, i8 * source) {
   while (c != 0);
 }
 
-// NOTE(rhett): Sloppy but does what I want
+// NOTE: Sloppy but does what I want
 internal void
 util_byte_dump(void * data, unsigned int data_length) {
   unsigned int bytes_per_line = 8;
@@ -262,7 +262,7 @@ util_base64_generate_decoding_table() {
 
 internal u32
 util_base64_calculate_decoded_length(u8 * data, u32 data_length) {
-  // TODO(rhett): correct this automatically 
+  // TODO: correct this automatically 
   if (data_length % 4) {
     printf("[X] data_length is not divisible by 4.\n");
     abort();
@@ -281,7 +281,7 @@ util_base64_calculate_decoded_length(u8 * data, u32 data_length) {
 
 internal u32
 util_base64_decode(u8 * data, u32 data_length, u8 * buffer) {
-  // TODO(rhett): correct this automatically 
+  // TODO: correct this automatically 
   if (data_length % 4) {
     printf("[X] data_length is not divisible by 4.\n");
     abort();
