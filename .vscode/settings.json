@@ -15,6 +15,13 @@
         "xhash": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "coroutine": "cpp"
+        "coroutine": "cpp",
+        "ios": "cpp",
+        "xiosbase": "cpp",
+        "algorithm": "cpp",
+        "optional": "cpp",
+        "system_error": "cpp",
+        "xlocmon": "cpp",
+        "xtr1common": "cpp"
     }
 }

@@ -84,22 +84,22 @@ int main(void)
 int mainCRTStartup(void)
 #endif // YOTE_INTERNAL
 {
-App_Memory app_memory;
-app_memory.platform_api = {
-    reinterpret_cast<platform_folder_create*>(platform_win_folder_create),
-    reinterpret_cast<platform_buffer_write_to_file*>(platform_win_buffer_write_to_file),
-    reinterpret_cast<platform_buffer_load_from_file*>(platform_win_buffer_load_from_file),
-    reinterpret_cast<platform_wall_clock*>(platform_win_wall_clock),
-    reinterpret_cast<platform_elapsed_seconds*>(platform_win_elapsed_seconds),
-#if defined(YOTE_PLATFORM_USE_SOCKETS)
-    reinterpret_cast<platform_socket_udp_create_and_bind*>(platform_win_socket_udp_create_and_bind),
-    reinterpret_cast<platform_receive_from*>(platform_win_receive_from),
-    reinterpret_cast<platform_send_to*>(platform_win_send_to),
-#endif // YOTE_PLATFORM_USE_SOCKETS
-};
+    App_Memory app_memory;
+    app_memory.platform_api = {
+        reinterpret_cast<platform_folder_create*>(platform_win_folder_create),
+        reinterpret_cast<platform_buffer_write_to_file*>(platform_win_buffer_write_to_file),
+        reinterpret_cast<platform_buffer_load_from_file*>(platform_win_buffer_load_from_file),
+        reinterpret_cast<platform_wall_clock*>(platform_win_wall_clock),
+        reinterpret_cast<platform_elapsed_seconds*>(platform_win_elapsed_seconds),
+        #if defined(YOTE_PLATFORM_USE_SOCKETS)
+        reinterpret_cast<platform_socket_udp_create_and_bind*>(platform_win_socket_udp_create_and_bind),
+        reinterpret_cast<platform_receive_from*>(platform_win_receive_from),
+        reinterpret_cast<platform_send_to*>(platform_win_send_to),
+        #endif // YOTE_PLATFORM_USE_SOCKETS
+    };
 
-app_memory.backing_memory.size = MB(100);
-app_memory.backing_memory.data = reinterpret_cast<u8*>(VirtualAlloc(NULL, app_memory.backing_memory.size, MEM_COMMIT, PAGE_READWRITE));
+    app_memory.backing_memory.size = MB(100);
+    app_memory.backing_memory.data = reinterpret_cast<u8*>(VirtualAlloc(NULL, app_memory.backing_memory.size, MEM_COMMIT, PAGE_READWRITE));
 
 	LARGE_INTEGER local_performance_frequency;
 	QueryPerformanceFrequency(&local_performance_frequency);
