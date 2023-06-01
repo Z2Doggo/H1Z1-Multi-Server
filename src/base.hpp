@@ -37,7 +37,7 @@ using u64 = uint64_t;
 using uptr = uintptr_t;
 using usize = size_t;
 
-using b8 = i8;
+using b8 = i8; // decided to use bool data type for packets instead of this
 using b16 = i16;
 using b32 = i32;
 using b64 = i64;

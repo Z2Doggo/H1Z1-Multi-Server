@@ -34,10 +34,8 @@ struct Login_Packet_LoginReply {
   str ip_country_code;
 };
 
-
 // test func for testing purposes
 int main() {
   str test = "yes very much so!";
   u32 length = test.length();
-
 }
