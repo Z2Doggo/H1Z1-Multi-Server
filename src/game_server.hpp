@@ -19,7 +19,7 @@
 //#define printf(s, ...) platform_win_console_write(s, __VA_ARGS__)
 //#endif // YOTE_INTERNAL
 
-#if !defined(YOTE_INTERNAL)
+#ifndef YOTE_INTERNAL
 void platform_win_console_write(const char* format, ...)
 {
     va_list args;

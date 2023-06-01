@@ -5,6 +5,16 @@
         "xlocale": "cpp",
         "iostream": "cpp",
         "unordered_map": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "array": "cpp",
+        "format": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "type_traits": "cpp",
+        "vector": "cpp",
+        "xhash": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp",
+        "coroutine": "cpp"
     }
 }
