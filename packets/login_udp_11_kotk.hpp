@@ -55,7 +55,6 @@ str login_packet_names[static_cast<int>(Login_Packet_Kind::Login_Packet_Kind__En
 #undef LOGIN_PACKET_KIND
 };
 
-
 std::unordered_map<Login_Packet_Kind, u32> login_registered_ids = {
     {Login_Packet_Kind::Login_Packet_Kind_LoginRequest, 0x1},
     {Login_Packet_Kind::Login_Packet_Kind_LoginReply, 0x2},

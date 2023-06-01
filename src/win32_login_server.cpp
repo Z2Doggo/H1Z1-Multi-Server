@@ -98,10 +98,8 @@ app_memory.platform_api = {
 #endif // YOTE_PLATFORM_USE_SOCKETS
 };
 
-
 app_memory.backing_memory.size = MB(100);
 app_memory.backing_memory.data = reinterpret_cast<u8*>(VirtualAlloc(NULL, app_memory.backing_memory.size, MEM_COMMIT, PAGE_READWRITE));
-
 
 	LARGE_INTEGER local_performance_frequency;
 	QueryPerformanceFrequency(&local_performance_frequency);

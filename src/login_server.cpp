@@ -7,4 +7,4 @@
 #include "base_platform.hpp"
 #include "./packets/login_udp_11_kotk.cpp"
 
-#include "./utility/util.cpp"
+#include "./utilities/util.cpp"
