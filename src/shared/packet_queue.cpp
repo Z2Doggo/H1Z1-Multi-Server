@@ -75,5 +75,5 @@ internal void packet_queue_pop_and_send(Packet_Queue *queue,
 
   queue->buffer_tail -= entry->length;
   queue->entries_tail -= 1;
-  *entry = Packet_Queue_Entry();
+  *entry = Packet_Queue_Entry{}; // Zero-initialize the structure
 }
