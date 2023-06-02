@@ -1,29 +1,29 @@
 // NOTE(rhett): Fix complaints by the VS address sanitizer
 #define STBSP__ASAN __declspec(no_sanitize_address)
 #define STB_SPRINTF_IMPLEMENTATION
+#include "./src/thirdparty_utilities/stb_sprintf.h"
 
-#include <Windows.h>
-#include <cstdarg>
-#include <cstdio>
-#include <iostream>
-
-// #if defined(BASE_INTERNAL)
+// #if defined(YOTE_INTERNAL)
 ////#include <stdio.h>
 ////#include <stdlib.h>
 ////#include <assert.h>
 // #else
 // static void platform_win_console_write(char* format, ...);
 // #define printf(s, ...) platform_win_console_write(s, __VA_ARGS__)
-// #endif // BASE_INTERNAL
+// #endif // YOTE_INTERNAL
 
-#ifndef BASE_INTERNAL
-void platform_win_console_write(const char *format, ...) {
+#if !defined(YOTE_INTERNAL)
+internal void platform_win_console_write(char *format, ...) {
   va_list args;
   va_start(args, format);
 
-  HANDLE standard_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+  local_persist HANDLE standard_handle;
+  if (!standard_handle) {
+    standard_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+  }
+
   char buffer[1024] = {0};
-  int to_write = vsnprintf(buffer, sizeof(buffer), format, args);
+  int to_write = stbsp_vsnprintf(buffer, sizeof(buffer), format, args);
 
   DWORD written;
   WriteConsole(standard_handle, buffer, to_write, &written, NULL);
@@ -31,7 +31,7 @@ void platform_win_console_write(const char *format, ...) {
 
   va_end(args);
 }
-#endif // BASE_INTERNAL
+#endif // YOTE_INTERNAL
 
 #if defined(TERMINAL_UI)
 #define printf
@@ -64,9 +64,9 @@ struct App_Memory {
   Key_States key_states;
 };
 
-#if defined(BASE_INTERNAL)
+#if defined(YOTE_INTERNAL)
 #define APP_TICK(name) void name(App_Memory *app_memory, b32 should_reload)
 #else
 #define APP_TICK(name) void name(App_Memory *app_memory)
-#endif // BASE_INTERNAL
+#endif // YOTE_INTERNAL
 typedef APP_TICK(app_tick_t);
