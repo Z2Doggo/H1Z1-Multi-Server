@@ -27,6 +27,7 @@ static void platform_win_console_write(char *format, ...);
 
 #include "./packets/login_udp_11_kotk.cpp"
 #include "./shared/connection.hpp"
+#include "./shared/packet_queue.cpp"
 #include "./shared/protocol/fragment_pool.cpp"
 #include "./shared/protocol/stream.hpp"
 #include "./shared/session.hpp"
