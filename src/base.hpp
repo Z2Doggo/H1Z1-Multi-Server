@@ -42,6 +42,8 @@ typedef i64 b64;
 typedef float f32;
 typedef double f64;
 
+typedef std::string string;
+
 #if defined(BASE_INTERNAL)
 // NOTE(rhett): removing static linkage to play along with superluminal
 #define internal
