@@ -294,9 +294,9 @@ PARAMS_DECLARE(void *, arena_push_size, Arena *arena; isize size;
 
 // TODO(rhett): preeeeeeeeeetty sure this will work right
 #define arena_push_struct(arena, type, ...)                                    \
-  (type *)arena_push_size(arena, SIZE_OF(type), __VA_ARGS__)
+  (type *)arena_push_size(arena, sizeof(type), __VA_ARGS__)
 #define arena_push_array(arena, type, count, ...)                              \
-  (type *)arena_push_size(arena, SIZE_OF(type) * count, __VA_ARGS__)
+  (type *)arena_push_size(arena, sizeof(type) * count, __VA_ARGS__)
 #define arena_bootstrap_push_struct(buffer, capacity, name, type, member, ...) \
   arena_bootstrap_push_size(buffer, capacity, name, SIZE_OF(type),             \
                             offsetof(type, member), __VA_ARGS__)
