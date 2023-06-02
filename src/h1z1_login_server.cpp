@@ -31,8 +31,11 @@ static void platform_win_console_write(char *format, ...);
 #include "./shared/platform/platform.hpp"
 #include "./shared/platform/platform_win.cpp"
 #include "./shared/protocol/fragment_pool.cpp"
+#include "./shared/protocol/input_stream.cpp"
+#include "./shared/protocol/output_stream.cpp"
 #include "./shared/protocol/stream.hpp"
 #include "./shared/session.hpp"
 #include "./utilities/crypt_rc4.cpp"
 #include "./utilities/endian.cpp"
 #include "./utilities/util.cpp"
+
